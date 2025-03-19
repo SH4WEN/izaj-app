@@ -1,0 +1,95 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function PendingRequest() {
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([
+    {
+      id: "001",
+      name: "LED Bulb",
+      category: "Bulbs",
+      price: "Php 345.99",
+      stock: 100,
+      status: "In Stock",
+      imageUrl: "light1.jpg", // Assuming you have an image URL
+      detailsPage: "/product/001",
+    },
+    // Add more products as needed
+  ]);
+
+  // Handle product click to navigate to details page
+  const handleProductClick = (productId) => {
+    navigate(`/awaiting_approval/${productId}`);
+  };
+
+  return (
+    <>
+      <div className="ml-5 mr-5 sm:ml-70">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden mt-5">
+          <div className="p-6">
+            <h5 className="text-xl font-bold mb-4">Pending Request</h5>
+            {/* Table */}
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                      Product ID
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                      Name
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                      Category
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                      Price
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                      Stock
+                    </th>
+                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product) => (
+                    <tr key={product.id} className="hover:bg-gray-50">
+                      <td
+                        className="px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                        onClick={() => handleProductClick(product.id)}
+                      >
+                        {product.id}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-700">
+                        {product.name}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-700">
+                        {product.category}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-700">
+                        {product.price}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-700">
+                        {product.stock}
+                      </td>
+                      <td className="px-4 py-2 text-sm text-green-600 font-medium">
+                        {product.status}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="p-4 bg-gray-100">
+            <small className="text-gray-500">Last updated 3 mins ago</small>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default PendingRequest;
