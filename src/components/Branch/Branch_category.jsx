@@ -42,7 +42,7 @@ function Branch_stock() {
                 </div>
                 {/* View Button */}
                 <button
-                  className="w-full md:w-auto bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+                  className="w-full md:w-auto cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                   onClick={() => {
                     console.log("View LED Lights");
                     navigate("/branch_products"); // Navigate to the product table page

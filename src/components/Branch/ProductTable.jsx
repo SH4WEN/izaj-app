@@ -57,7 +57,7 @@ function ProductTable() {
                   {products.map((product) => (
                     <tr key={product.id} className="hover:bg-gray-50">
                       <td
-                        className="px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                        className="px-4 py-2 text-sm font-bold text-gray-700 cursor-pointer"
                         onClick={() => handleProductClick(product.id)}
                       >
                         {product.id}

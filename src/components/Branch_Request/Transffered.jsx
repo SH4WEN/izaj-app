@@ -9,54 +9,8 @@ function Transffered() {
       category: "Bulbs",
       price: "$5.99",
       stock: 100,
-      status: "In Stock",
+      status: "Transferred",
       description: "Energy-efficient LED bulb with a lifespan of 25,000 hours.",
-    },
-    {
-      id: "002",
-      name: "Smart Light Strip",
-      category: "Smart Lighting",
-      price: "$29.99",
-      stock: 50,
-      status: "In Stock",
-      description:
-        "RGB smart light strip compatible with Alexa and Google Home.",
-    },
-    {
-      id: "003",
-      name: "Chandelier",
-      category: "Decorative",
-      price: "$199.99",
-      stock: 10,
-      status: "Low Stock",
-      description: "Elegant chandelier for modern interiors.",
-    },
-    {
-      id: "004",
-      name: "Floodlight",
-      category: "Outdoor",
-      price: "$49.99",
-      stock: 25,
-      status: "In Stock",
-      description: "Bright outdoor floodlight for security and illumination.",
-    },
-    {
-      id: "005",
-      name: "Desk Lamp",
-      category: "Lamps",
-      price: "$39.99",
-      stock: 0,
-      status: "Out of Stock",
-      description: "Adjustable desk lamp for workspace lighting.",
-    },
-    {
-      id: "006",
-      name: "Ceiling Light",
-      category: "Fixtures",
-      price: "$89.99",
-      stock: 15,
-      status: "Low Stock",
-      description: "Modern ceiling light fixture for homes and offices.",
     },
   ];
 
@@ -113,7 +67,7 @@ function Transffered() {
                     className="hover:bg-gray-50 cursor-pointer"
                     onClick={() => handleRowClick(product)}
                   >
-                    <td className="px-4 py-2 text-sm text-gray-700">
+                    <td className="px-4 font-bold py-2 text-sm text-gray-700">
                       {product.id}
                     </td>
                     <td className="px-4 py-2 text-sm text-gray-700">
@@ -130,9 +84,9 @@ function Transffered() {
                     </td>
                     <td
                       className={`px-4 py-2 text-sm font-medium ${
-                        product.status === "In Stock"
+                        product.status === "Transferred"
                           ? "text-green-600"
-                          : product.status === "Low Stock"
+                          : product.status === "In-Transit"
                           ? "text-yellow-600"
                           : "text-red-600"
                       }`}
@@ -175,7 +129,7 @@ function Transffered() {
                 <span className="font-medium">Status:</span>{" "}
                 <span
                   className={
-                    selectedProduct.status === "In Stock"
+                    selectedProduct.status === "Transferred"
                       ? "text-green-600"
                       : selectedProduct.status === "Low Stock"
                       ? "text-yellow-600"

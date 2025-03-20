@@ -8,7 +8,7 @@ function PendingRequest() {
       category: "Bulbs",
       price: "Php 345.99",
       stock: 100,
-      status: "In Stock",
+      status: "Pending",
       imageUrl: "light1.jpg", // Assuming you have an image URL
       description: "Energy-efficient LED bulb with a lifespan of 25,000 hours.",
     },
@@ -75,7 +75,7 @@ function PendingRequest() {
                     className="hover:bg-gray-50 cursor-pointer"
                     onClick={() => handleProductClick(product)}
                   >
-                    <td className="px-4 py-2 text-sm text-gray-700">
+                    <td className="px-4 font-bold py-2 text-sm text-gray-700">
                       {product.id}
                     </td>
                     <td className="px-4 py-2 text-sm text-gray-700">
@@ -90,7 +90,7 @@ function PendingRequest() {
                     <td className="px-4 py-2 text-sm text-gray-700">
                       {product.stock}
                     </td>
-                    <td className="px-4 py-2 text-sm text-green-600 font-medium">
+                    <td className="px-4 py-2 text-sm text-red-600 font-medium">
                       {product.status}
                     </td>
                   </tr>

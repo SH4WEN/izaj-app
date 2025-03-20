@@ -1,6 +1,58 @@
 import React from "react";
+import { Pie } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+} from "chart.js";
+
+// Register Chart.js components
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title
+);
 
 function Dashboard() {
+  // Data for the Pie Chart
+  const pieChartData = {
+    labels: ["Red", "Blue", "Yellow"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [300, 50, 100],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+      },
+    ],
+  };
+
+  // Data for the Line Chart
+  const lineChartData = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "My First dataset",
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        data: [65, 59, 80, 81, 56, 55, 40],
+        fill: true,
+      },
+    ],
+  };
+
   return (
     <>
       {/* Home Page */}
@@ -16,7 +68,6 @@ function Dashboard() {
           </div>
 
           {/* Repeat for other cards if needed */}
-          {/* Example: */}
           <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden">
             <div className="p-6">
               <h5 className="text-xl font-bold">Another Card</h5>
@@ -27,28 +78,33 @@ function Dashboard() {
 
         {/* Analytics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-          {/* First Card */}
+          {/* First Card - Pie Chart */}
           <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden">
             <div className="p-6">
-              <h5 className="text-xl font-bold">Analytics 1</h5>
-              <h6 className="text-xl text-green-500 font-bold">100</h6>
+              <h5 className="text-xl font-bold">Popular Products</h5>
+              <div className="mt-4">
+                <Pie data={pieChartData} />
+              </div>
             </div>
-            <div className="p-4 bg-gray-100">
+            <div className="p-4 mt-7 bg-gray-100">
               <small className="text-gray-500">Last updated 3 mins ago</small>
             </div>
           </div>
 
-          {/* Second Card (Spans 2 columns on medium screens and above) */}
+          {/* Second Card - Line Chart (Spans 2 columns on medium screens and above) */}
           <div className="md:col-span-2 bg-gray-50 rounded-lg shadow-md overflow-hidden">
             <div className="p-6">
-              <h5 className="text-xl font-bold">Analytics 2</h5>
-              <h6 className="text-xl text-green-500 font-bold">200</h6>
+              <h5 className="text-xl font-bold">Stock OverView</h5>
+              <div className="mt-4">
+                <Line data={lineChartData} />
+              </div>
             </div>
             <div className="p-4 bg-gray-100">
               <small className="text-gray-500">Last updated 3 mins ago</small>
             </div>
           </div>
         </div>
+
         {/* Table Card */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden mt-5">
           <div className="p-6">
