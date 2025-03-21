@@ -18,11 +18,11 @@ function BranchLocation() {
     },
   ];
 
-  // Handle View Click
-  const handleViewClick = (branchId) => {
-    console.log(`View Branch ${branchId}`); // Log the branch ID
-    navigate(`/branch_stock/${branchId}`); // Navigate to the desired route with branch ID
-  };
+  // // Handle View Click
+  // const handleViewClick = (branchId) => {
+  //   console.log(`View Branch ${branchId}`); // Log the branch ID
+  //   navigate(`/branch_stock/${branchId}`); // Navigate to the desired route with branch ID
+  // };
 
   return (
     <>
@@ -61,10 +61,13 @@ function BranchLocation() {
                 {/* View Button - Sticky to the bottom */}
                 <div className="p-4 bg-gray-100 mt-auto">
                   <button
-                    className="w-full bg-blue-500 cursor-pointer text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
-                    onClick={() => handleViewClick(branch.id)} // Pass branch ID to the handler
+                    className="w-full md:w-auto cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+                    onClick={() => {
+                      console.log("View LED Lights");
+                      navigate("/branch_category"); // Navigate to the product table page
+                    }}
                   >
-                    View
+                    View Products
                   </button>
                 </div>
               </div>
