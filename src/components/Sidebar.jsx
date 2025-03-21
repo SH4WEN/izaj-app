@@ -135,6 +135,16 @@ function Sidebar() {
                   Setting
                 </a>
               </li>
+
+              <li>
+                <Link
+                  to={"/add-user"}
+                  className="flex items-center w-full mt-3 font-bold hover:text-orange-400 transition duration-300"
+                >
+                  <UserCircleIcon className="h-5 w-5 mr-2" />
+                  User
+                </Link>
+              </li>
             </div>
           </ul>
         </nav>

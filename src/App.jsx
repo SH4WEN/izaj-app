@@ -19,6 +19,8 @@ import Request_product from "./components/Branch/Request_product";
 import Awaiting_approval from "./components/Branch_Request/Awaiting_approval";
 import Branch_category from "./components/Branch/Branch_category";
 import Login from "./components/aut/Login";
+import AddUser from "./components/Branch-Manager-SuperAdmin/AddUser";
+import UserManagement from "./components/Branch-Manager-SuperAdmin/UserManagement";
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
           {/* Login Page */}
           <Route path="/login" element={<Login />} />
 
-          {/* Protected Routes (with Sidebar) */}
+          {/* Protected Routes (with Sidebar access to admin and branch manager) */}
           <Route
             path="/*"
             element={
@@ -94,6 +96,12 @@ function App() {
                   <Route
                     path="/product/:productId"
                     element={<ProductDetails />}
+                  />
+                  <Route path="/add-user" element={<AddUser />} />
+                  {/* User Management Page */}
+                  <Route
+                    path="/user-management/:userId"
+                    element={<UserManagement />}
                   />
                 </Routes>
               </div>
