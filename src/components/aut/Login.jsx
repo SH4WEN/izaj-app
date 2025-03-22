@@ -1,33 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    // Simulate authentication
+    if (email === "admin@example.com" && password === "password") {
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("userRole", "admin"); // Set the user role based on your logic
+      navigate("/sidebar/dashboard");
+    } else if (email === "superAdmin@example.com" && password === "password") {
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("userRole", "superAdmin"); // Set the user role based on your logic
+      navigate("/sidebar/add-user");
+    } else {
+      alert("Invalid credentials");
+    }
+  };
+
   return (
     <div
       className="flex justify-center items-center min-h-screen bg-cover bg-center relative"
-      style={{ backgroundImage: "url('/src/assets/image/light1.jpg')" }} // Replace with your image path
+      style={{ backgroundImage: "url('/src/assets/image/light1.jpg')" }}
     >
-      {/* Blurred Overlay */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
-
-      {/* Main Container */}
       <div className="w-full max-w-6xl mx-4 flex flex-col md:flex-row items-center justify-between relative z-10">
-        {/* Company Name (Left Side) */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center md:justify-start mx-30 ">
-          {/* IZAJ (Top) */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center md:justify-start mx-30">
           <h1 className="text-8xl font-bold text-amber-500 text-center md:text-left">
             IZAJ
           </h1>
-
-          {/* LIGHTING CENTRE (Bottom) */}
           <p className="text-5xl font-bold text-amber-400 text-center md:text-left mt-4">
             LIGHTING CENTRE
           </p>
         </div>
-
-        {/* Login Card (Right Side) */}
-        <div className="w-full md:w-1/1 max-w-md bg-gradient-to-b  from-black/10 to-black/10 backdrop-blur-md rounded-lg shadow-lg p-6 mt-8 md:mt-0">
+        <div className="w-full md:w-1/1 max-w-md bg-gradient-to-b from-black/10 to-black/10 backdrop-blur-md rounded-lg shadow-lg p-6 mt-8 md:mt-0">
           <div className="card-body">
-            <div className="flex flex-row items-center mx-20 mb-3  p-3">
+            <div className="flex flex-row items-center mx-20 mb-3 p-3">
               <div>
                 <img
                   src="/src/assets/image/logo.jpg"
@@ -41,8 +54,7 @@ function Login() {
                 </div>
               </div>
             </div>
-
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="mb-4">
                 <label
                   className="block text-amber-500 text-sm font-bold mb-2"
@@ -55,6 +67,8 @@ function Login() {
                   id="email"
                   type="email"
                   placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-6">
@@ -69,12 +83,14 @@ function Login() {
                   id="password"
                   type="password"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="flex items-center justify-between">
                 <button
                   className="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none cursor-pointer focus:shadow-outline"
-                  type="button"
+                  type="submit"
                 >
                   Sign In
                 </button>

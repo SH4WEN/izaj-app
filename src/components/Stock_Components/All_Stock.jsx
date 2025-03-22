@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import light1 from "/src/assets/image/light1.jpg"; // Import the static image
 
+const CATEGORIES = ["Bulbs", "Lights", "Fixtures", "Accessories"];
+
 function All_Stock() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([
@@ -170,14 +172,20 @@ function All_Stock() {
                   <label className="block text-sm font-medium text-gray-700">
                     Category
                   </label>
-                  <input
-                    type="text"
+                  <select
                     name="category"
                     value={newProduct.category}
                     onChange={handleInputChange}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
-                  />
+                  >
+                    <option value="">Select a category</option>
+                    {CATEGORIES.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 {/* Price */}
