@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import light1 from "/src/assets/image/light1.jpg"; // Import the static image
+import light1 from "/src/assets/image/light1.jpg";
 
 const CATEGORIES = ["Bulbs", "Lights", "Fixtures", "Accessories"];
 
@@ -20,7 +20,7 @@ function All_Stock() {
     // Add more products as needed
   ]);
 
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // State to manage modal visibility
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [newProduct, setNewProduct] = useState({
     id: "",
     name: "",
@@ -88,7 +88,7 @@ function All_Stock() {
                       Product ID
                     </th>
                     <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Name
+                      Product Name
                     </th>
                     <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
                       Category
@@ -97,7 +97,7 @@ function All_Stock() {
                       Price
                     </th>
                     <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Stock
+                      Quantity
                     </th>
                     <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
                       Status
@@ -152,14 +152,14 @@ function All_Stock() {
             <h2 className="text-xl font-bold mb-4">Add New Product</h2>
             <form onSubmit={handleAddProductSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Name */}
+                {/* Product Name */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Name
+                    Product Name
                   </label>
                   <input
                     type="text"
-                    name="name"
+                    name="product-name"
                     value={newProduct.name}
                     onChange={handleInputChange}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -203,14 +203,14 @@ function All_Stock() {
                   />
                 </div>
 
-                {/* Stock */}
+                {/* Quantity */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Stock
+                    Quantity
                   </label>
                   <input
                     type="number"
-                    name="stock"
+                    name="quantity"
                     value={newProduct.stock}
                     onChange={handleInputChange}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -224,6 +224,7 @@ function All_Stock() {
                     Status
                   </label>
                   <select
+                    disabled={true}
                     name="status"
                     value={newProduct.status}
                     onChange={handleInputChange}
@@ -231,8 +232,6 @@ function All_Stock() {
                     required
                   >
                     <option value="In Stock">In Stock</option>
-                    <option value="Out of Stock">Out of Stock</option>
-                    <option value="Discontinued">Discontinued</option>
                   </select>
                 </div>
 
