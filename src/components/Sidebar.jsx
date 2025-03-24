@@ -10,6 +10,8 @@ import {
   UserCircleIcon, // User Profile
 } from "@heroicons/react/outline";
 
+import { useState } from "react";
+
 function Sidebar() {
   const navigate = useNavigate();
 
@@ -24,6 +26,12 @@ function Sidebar() {
 
     // Redirect to the login page
     navigate("/login");
+  };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -73,72 +81,98 @@ function Sidebar() {
               </Link>
             </li>
 
-            {/* Branch Request */}
+            {/* Branch Request  */}
             <li>
-              <a
-                href="#"
-                className="flex items-center w-full mt-5 font-bold hover:text-orange-400 transition duration-300"
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center w-full  cursor-pointer font-bold hover:text-orange-400 transition duration-300"
               >
                 <ClipboardListIcon className="h-5 w-5 mr-2" />
                 Branch Request
+                {/* Dropdown arrow icon */}
+                <svg
+                  className={`ml-2 w-4 h-4 transition-transform duration-200 ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </li>
+
+            {/* Dropdown content for BranchRequest */}
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                isDropdownOpen ? "max-h-40" : "max-h-0"
+              }`}
+            >
+              <ul className="pl-4">
+                {/* Pending Request */}
+                <li>
+                  <Link
+                    to="/pending_request"
+                    className="flex items-center w-full px-5 py-2 font-semibold hover:text-orange-400 transition duration-300"
+                  >
+                    <ClipboardListIcon className="h-5 w-5 mr-2" />
+                    Pending Request
+                  </Link>
+                </li>
+
+                {/* Transferred */}
+                <li>
+                  <Link
+                    to="/transferred"
+                    className="flex items-center w-full px-5 py-2 font-semibold hover:text-orange-400 transition duration-300"
+                  >
+                    <SwitchHorizontalIcon className="h-5 w-5 mr-2" />
+                    Transferred
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Stock */}
+            {/* <div className="mt-3"> */}
+            <li>
+              <Link
+                to="/all_stock"
+                className="flex items-center w-full mt-5 font-bold hover:text-orange-400 transition duration-300"
+              >
+                <CubeIcon className="h-5 w-5 mr-2" />
+                Stock
+              </Link>
+            </li>
+
+            {/* Setting */}
+            <li>
+              <a
+                href="#"
+                className="flex items-center w-full  font-bold hover:text-orange-400 transition duration-300"
+              >
+                <CogIcon className="h-5 w-5 mr-2" />
+                Setting
               </a>
             </li>
 
-            {/* Pending Request */}
             <li>
               <Link
-                to="/pending_request"
-                className="flex items-center w-full px-5 font-semibold hover:text-orange-400 transition duration-300"
+                to="/add-user"
+                className="flex items-center w-full  font-bold hover:text-orange-400 transition duration-300"
               >
-                <ClipboardListIcon className="h-5 w-5 mr-2" />
-                Pending Request
+                <UserCircleIcon className="h-5 w-5 mr-2" />
+                User
               </Link>
             </li>
-
-            {/* Transferred */}
-            <li>
-              <Link
-                to="/transferred"
-                className="flex items-center w-full px-5 font-semibold hover:text-orange-400 transition duration-300"
-              >
-                <SwitchHorizontalIcon className="h-5 w-5 mr-2" />
-                Transferred
-              </Link>
-            </li>
-
-            {/* Stock */}
-            <div className="mt-15">
-              <li>
-                <Link
-                  to="/all_stock"
-                  className="flex items-center w-full mt-5 font-bold hover:text-orange-400 transition duration-300"
-                >
-                  <CubeIcon className="h-5 w-5 mr-2" />
-                  Stock
-                </Link>
-              </li>
-
-              {/* Setting */}
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center w-full mt-3 font-bold hover:text-orange-400 transition duration-300"
-                >
-                  <CogIcon className="h-5 w-5 mr-2" />
-                  Setting
-                </a>
-              </li>
-
-              <li>
-                <Link
-                  to="/add-user"
-                  className="flex items-center w-full mt-3 font-bold hover:text-orange-400 transition duration-300"
-                >
-                  <UserCircleIcon className="h-5 w-5 mr-2" />
-                  User
-                </Link>
-              </li>
-            </div>
+            {/* </div> */}
           </ul>
         </nav>
       </div>
