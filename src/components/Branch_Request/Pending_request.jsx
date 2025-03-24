@@ -52,7 +52,7 @@ function PendingRequest() {
                     Product ID
                   </th>
                   <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                    Name
+                    Product Name
                   </th>
                   <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
                     Category
@@ -61,7 +61,7 @@ function PendingRequest() {
                     Price
                   </th>
                   <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                    Stock
+                    Quantity
                   </th>
                   <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
                     Status
