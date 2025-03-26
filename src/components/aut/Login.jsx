@@ -34,7 +34,7 @@ function Login() {
           <h1 className="text-8xl font-bold text-amber-500 text-center md:text-left">
             IZAJ
           </h1>
-          <p className="text-5xl font-bold text-amber-400 text-center md:text-left mt-4">
+          <p className="text-5xl font-roboto font-bold text-amber-400 text-center md:text-left mt-4">
             LIGHTING CENTRE
           </p>
         </div>

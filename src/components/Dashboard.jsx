@@ -62,7 +62,7 @@ function Dashboard() {
           {/* Total Card */}
           <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden">
             <div className="p-6">
-              <h5 className="text-xl font-bold">Totals</h5>
+              <h5 className="text-xl font-title  ">Totals</h5>
               <h6 className="text-xl text-green-500 font-bold">100</h6>
             </div>
           </div>

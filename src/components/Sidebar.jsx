@@ -47,7 +47,7 @@ function Sidebar() {
             />
           </div>
           <div className="ml-2">
-            <div className="text-xl font-bold">IZAJ-LIGHTING</div>
+            <div className="text-xl font-title">IZAJ-LIGHTING</div>
           </div>
         </div>
 
@@ -87,7 +87,7 @@ function Sidebar() {
                 onClick={toggleDropdown}
                 className="flex items-center w-full  cursor-pointer font-bold hover:text-orange-400 transition duration-300"
               >
-                <ClipboardListIcon className="h-5 w-5 mr-2" />
+                <ClipboardListIcon className="  h-5 w-5 mr-2" />
                 Branch Request
                 {/* Dropdown arrow icon */}
                 <svg
