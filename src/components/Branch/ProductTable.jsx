@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSidebar } from "../SidebarContext";
 
 function ProductTable() {
   const navigate = useNavigate();
@@ -22,9 +23,15 @@ function ProductTable() {
     navigate(`/request_product/${productId}`);
   };
 
+  const { isCollapsed } = useSidebar();
+
   return (
     <>
-      <div className="ml-5 mr-5 sm:ml-70">
+      <div
+        className={`transition-all duration-300 ${
+          isCollapsed ? "ml-5" : "ml-1"
+        } p-2 sm:p-4 `}
+      >
         <div className="bg-white rounded-lg shadow-md overflow-hidden mt-5">
           <div className="p-6">
             <h5 className="text-xl font-bold mb-4">Available in Lucena</h5>

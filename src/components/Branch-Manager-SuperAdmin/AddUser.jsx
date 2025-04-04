@@ -5,8 +5,11 @@ import {
 } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSidebar } from "../SidebarContext";
 
 function AddUser() {
+  const { isCollapsed } = useSidebar();
+
   const navigate = useNavigate(); // Hook for programmatic navigation
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const [newUser, setNewUser] = useState({
@@ -58,8 +61,11 @@ function AddUser() {
 
   return (
     <>
-      {/* User Page */}
-      <div className="ml-5 mr-5 sm:ml-70">
+      <div
+        className={`transition-all duration-300 ${
+          isCollapsed ? "ml-5" : "ml-1"
+        } p-2 sm:p-4 `}
+      >
         {/* Add User Button */}
         <div className="flex justify-end mt-5">
           <button

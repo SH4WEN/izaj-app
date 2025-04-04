@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { LocationMarkerIcon, PhoneIcon } from "@heroicons/react/outline"; // Import icons from Heroicons
+import { useSidebar } from "../SidebarContext";
 
 function BranchLocation() {
   const navigate = useNavigate(); // Hook for programmatic navigation
@@ -23,11 +24,17 @@ function BranchLocation() {
   //   console.log(`View Branch ${branchId}`); // Log the branch ID
   //   navigate(`/branch_stock/${branchId}`); // Navigate to the desired route with branch ID
   // };
+  const { isCollapsed } = useSidebar();
 
   return (
     <>
-      {/* Branch Page */}
-      <div className="ml-5 mr-5 sm:ml-70">
+      <div
+        className={`transition-all duration-300 ${
+          isCollapsed ? "ml-5" : "ml-1"
+        } p-2 sm:p-4 `}
+      >
+        {/* Branch Page */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
           {/* Map over the branches array to render branch cards */}
           {branches.map((branch) => (

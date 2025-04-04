@@ -23,182 +23,199 @@ import UserManagement from "./components/Branch-Manager-SuperAdmin/UserManagemen
 import Unauthorized from "./components/Unauthorized";
 import ProtectedRoute from "./components/aut/ProtectedRoute";
 import Login from "./components/aut/Login";
+import { SidebarProvider, useSidebar } from "./components/SidebarContext";
 
 // Layout component that includes the Sidebar
-const Layout = ({ children }) => (
-  <div style={{ display: "flex" }}>
-    <Sidebar />
-    <div style={{ flex: 1 }}>{children}</div>
-  </div>
-);
+const Layout = ({ children }) => {
+  const { isCollapsed } = useSidebar();
+
+  return (
+    <div style={{ display: "flex" }}>
+      <Sidebar />
+      <div
+        style={{
+          flex: 1,
+          marginLeft: isCollapsed ? "80px" : "256px",
+          transition: "margin-left 0.3s ease",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Public Route: Login Page */}
-        <Route path="/login" element={<Login />} />
+    <>
+      <SidebarProvider>
+        <Router>
+          <Routes>
+            {/* Public Route: Login Page */}
+            <Route path="/login" element={<Login />} />
 
-        {/* Protected Routes */}
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Dashboard />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Dashboard />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/branch_location"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Branch_location />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/branch_products"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <ProductTable />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/branch_category"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Branch_category />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/request_product/:productId"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Request_product />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/pending_request"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Pending_request />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/transferred"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Transffered />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/awaiting_approval/:productId"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <Awaiting_approval />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/all_stock"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <All_Stock />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/product/:productId"
-          element={
-            <ProtectedRoute
-              allowedRoles={["admin", "branchManager", "superAdmin"]}
-            >
-              <Layout>
-                <ProductDetails />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/add-user"
-          element={
-            <ProtectedRoute allowedRoles={["superAdmin"]}>
-              <Layout>
-                <AddUser />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/user-management/:userId"
-          element={
-            <ProtectedRoute allowedRoles={["superAdmin", "branchManager"]}>
-              <Layout>
-                <UserManagement />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        {/* Public Route: Unauthorized Page */}
-        <Route path="/unauthorized" element={<Unauthorized />} />
+            {/* Protected Routes */}
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Dashboard />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Dashboard />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/branch_location"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Branch_location />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/branch_products"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <ProductTable />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/branch_category"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Branch_category />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/request_product/:productId"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Request_product />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/pending_request"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Pending_request />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/transferred"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Transffered />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/awaiting_approval/:productId"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <Awaiting_approval />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/all_stock"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <All_Stock />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/product/:productId"
+              element={
+                <ProtectedRoute
+                  allowedRoles={["admin", "branchManager", "superAdmin"]}
+                >
+                  <Layout>
+                    <ProductDetails />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/add-user"
+              element={
+                <ProtectedRoute allowedRoles={["superAdmin"]}>
+                  <Layout>
+                    <AddUser />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user-management/:userId"
+              element={
+                <ProtectedRoute allowedRoles={["superAdmin", "branchManager"]}>
+                  <Layout>
+                    <UserManagement />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            {/* Public Route: Unauthorized Page */}
+            <Route path="/unauthorized" element={<Unauthorized />} />
 
-        {/* Redirect to /dashboard if no route matches */}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
-      </Routes>
-    </Router>
+            {/* Redirect to /dashboard if no route matches */}
+            <Route path="*" element={<Navigate to="/dashboard" />} />
+          </Routes>
+        </Router>
+      </SidebarProvider>
+    </>
   );
 }
 

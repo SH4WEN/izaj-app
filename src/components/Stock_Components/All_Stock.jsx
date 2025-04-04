@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import light1 from "/src/assets/image/light1.jpg";
+import { useSidebar } from "../SidebarContext";
+import { Upload, Plus } from "lucide-react"; // Import Lucide icons
 
 const CATEGORIES = ["Bulbs", "Lights", "Fixtures", "Accessories"];
 
 function All_Stock() {
+  const { isCollapsed } = useSidebar();
   const navigate = useNavigate();
   const [products, setProducts] = useState([
     {
@@ -31,7 +34,6 @@ function All_Stock() {
     description: "",
   });
 
-  // Handle input changes for the add product form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewProduct((prevProduct) => ({
@@ -40,16 +42,13 @@ function All_Stock() {
     }));
   };
 
-  // Handle form submission for adding a new product
   const handleAddProductSubmit = (e) => {
     e.preventDefault();
-    // Generate a unique ID for the new product (for demo purposes only)
     const newId = String(products.length + 1).padStart(3, "0");
-    const productToAdd = { ...newProduct, id: newId, imageUrl: light1 }; // Add a default image for now
-    setProducts([...products, productToAdd]); // Add the new product to the list
-    setIsAddModalOpen(false); // Close the modal
+    const productToAdd = { ...newProduct, id: newId, imageUrl: light1 };
+    setProducts([...products, productToAdd]);
+    setIsAddModalOpen(false);
     setNewProduct({
-      // Reset the form
       id: "",
       name: "",
       category: "",
@@ -61,25 +60,44 @@ function All_Stock() {
     alert("Product added successfully!");
   };
 
-  // Handle product click to navigate to details page
   const handleProductClick = (productId) => {
     navigate(`/product/${productId}`);
   };
 
+  const handleImportExcel = () => {
+    // Add your Excel import functionality here
+    alert("Import Excel functionality will be implemented here");
+  };
+
   return (
     <>
-      <div className="ml-5 mr-5 sm:ml-70">
+      <div
+        className={`transition-all duration-300 ${
+          isCollapsed ? "ml-5" : "ml-1"
+        } p-2 sm:p-4 `}
+      >
         <div className="bg-white rounded-lg shadow-md overflow-hidden mt-5">
           <div className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h5 className="text-xl font-bold">All Stock</h5>
-              <button
-                onClick={() => setIsAddModalOpen(true)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Add Product
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleImportExcel}
+                  className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                >
+                  <Upload className="w-5 h-5" />
+                  Import Excel
+                </button>
+                <button
+                  onClick={() => setIsAddModalOpen(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <Plus className="w-5 h-5" />
+                  Add Product
+                </button>
+              </div>
             </div>
+            {/* Rest of your table and modal code remains the same */}
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white">
                 <thead>
@@ -145,7 +163,7 @@ function All_Stock() {
         </div>
       </div>
 
-      {/* Add Product Modal */}
+      {/* Add Product Modal (rest of your modal code remains the same) */}
       {isAddModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-black/30 to-black/70 z-50">
           <div className="bg-gray-100  rounded-lg shadow-lg p-6 w-full max-w-2xl">

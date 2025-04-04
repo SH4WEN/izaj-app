@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import { useSidebar } from "../SidebarContext";
 
 function UserManagement() {
+  const { isCollapsed } = useSidebar();
+
   const { userId } = useParams(); // Get the userId from the URL parameters
   const navigate = useNavigate(); // Hook for programmatic navigation
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
@@ -57,7 +60,11 @@ function UserManagement() {
   };
 
   return (
-    <div className="ml-5 mr-5 sm:ml-70">
+    <div
+      className={`transition-all duration-300 ${
+        isCollapsed ? "ml-5" : "ml-1"
+      } p-2 sm:p-4 `}
+    >
       <div className="p-6">
         <h1 className="text-2xl font-bold mb-4">User Management</h1>
         <div className="bg-white rounded-lg shadow-md p-6">

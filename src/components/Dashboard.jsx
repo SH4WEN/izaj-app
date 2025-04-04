@@ -1,6 +1,7 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Line } from "react-chartjs-2";
+import { useSidebar } from "./SidebarContext";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -12,6 +13,14 @@ import {
   LineElement,
   Title,
 } from "chart.js";
+import {
+  Package,
+  LineChart as LineChartIcon,
+  PieChart as PieChartIcon,
+  Lightbulb,
+  AlertCircle,
+  Clock,
+} from "lucide-react";
 
 // Register Chart.js components
 ChartJS.register(
@@ -26,12 +35,14 @@ ChartJS.register(
 );
 
 function Dashboard() {
+  const { isCollapsed } = useSidebar();
+
   // Data for the Pie Chart
   const pieChartData = {
-    labels: ["Red", "Blue", "Yellow"],
+    labels: ["LED Bulbs", "Smart Lights", "Chandeliers"],
     datasets: [
       {
-        label: "My First Dataset",
+        label: "Stock Distribution",
         data: [300, 50, 100],
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
@@ -41,10 +52,10 @@ function Dashboard() {
 
   // Data for the Line Chart
   const lineChartData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
     datasets: [
       {
-        label: "My First dataset",
+        label: "Monthly Stock Movement",
         backgroundColor: "rgba(75,192,192,0.4)",
         borderColor: "rgba(75,192,192,1)",
         data: [65, 59, 80, 81, 56, 55, 40],
@@ -54,181 +65,227 @@ function Dashboard() {
   };
 
   return (
-    <>
-      {/* Home Page */}
-      <div className="ml-5 mr-5 sm:ml-70">
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-5">
-          {/* Total Card */}
-          <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden">
-            <div className="p-6">
-              <h5 className="text-xl font-title  ">Totals</h5>
-              <h6 className="text-xl text-green-500 font-bold">100</h6>
+    <div
+      className={`transition-all duration-300 ${
+        isCollapsed ? "ml-5" : "ml-1"
+      } p-2 sm:p-4 `}
+    >
+      {/* Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {/* Total Stock Card */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-amber-100 rounded-full">
+              <Package className="text-amber-600" size={20} />
             </div>
+            <h5 className="text-lg font-medium">Total Stock</h5>
           </div>
-
-          {/* Repeat for other cards if needed */}
-          <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden">
-            <div className="p-6">
-              <h5 className="text-xl font-bold">Another Card</h5>
-              <h6 className="text-xl text-blue-500 font-bold">50</h6>
-            </div>
-          </div>
+          <h6 className="text-2xl font-bold text-gray-800 mt-2">450</h6>
         </div>
 
-        {/* Analytics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-          {/* First Card - Pie Chart */}
-          <div className="bg-gray-50 rounded-lg shadow-md overflow-hidden">
-            <div className="p-6">
-              <h5 className="text-xl font-bold">Popular Products</h5>
-              <div className="mt-4">
-                <Pie data={pieChartData} />
-              </div>
+        {/* Products Card */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-100 rounded-full">
+              <Lightbulb className="text-blue-600" size={20} />
             </div>
-            <div className="p-4 mt-7 bg-gray-100">
-              <small className="text-gray-500">Last updated 3 mins ago</small>
-            </div>
+            <h5 className="text-lg font-medium">Products</h5>
           </div>
-
-          {/* Second Card - Line Chart (Spans 2 columns on medium screens and above) */}
-          <div className="md:col-span-2 bg-gray-50 rounded-lg shadow-md overflow-hidden">
-            <div className="p-6">
-              <h5 className="text-xl font-bold">Stock OverView</h5>
-              <div className="mt-4">
-                <Line data={lineChartData} />
-              </div>
-            </div>
-            <div className="p-4 bg-gray-100">
-              <small className="text-gray-500">Last updated 3 mins ago</small>
-            </div>
-          </div>
+          <h6 className="text-2xl font-bold text-gray-800 mt-2">50</h6>
         </div>
 
-        {/* Table Card */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden mt-5">
+        {/* Categories Card */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-green-100 rounded-full">
+              <Lightbulb className="text-green-600" size={20} />
+            </div>
+            <h5 className="text-lg font-medium">Categories</h5>
+          </div>
+          <h6 className="text-2xl font-bold text-gray-800 mt-2">12</h6>
+        </div>
+
+        {/* Branches Card */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-purple-100 rounded-full">
+              <Lightbulb className="text-purple-600" size={20} />
+            </div>
+            <h5 className="text-lg font-medium">Branches</h5>
+          </div>
+          <h6 className="text-2xl font-bold text-gray-800 mt-2">8</h6>
+        </div>
+      </div>
+
+      {/* Analytics Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        {/* Pie Chart Card */}
+        <div className="bg-white rounded-lg shadow overflow-hidden lg:col-span-1">
           <div className="p-6">
-            <h5 className="text-xl font-bold mb-4">Lighting Products</h5>
-            {/* Table */}
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Product ID
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Name
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Category
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Price
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Stock
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-                      Status
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* Row 1 */}
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-4 py-2 text-sm text-gray-700">001</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      LED Bulb
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">Bulbs</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">$5.99</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">100</td>
-                    <td className="px-4 py-2 text-sm text-green-600 font-medium">
-                      In Stock
-                    </td>
-                  </tr>
-                  {/* Row 2 */}
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-4 py-2 text-sm text-gray-700">002</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Smart Light Strip
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Smart Lighting
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">$29.99</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">50</td>
-                    <td className="px-4 py-2 text-sm text-green-600 font-medium">
-                      In Stock
-                    </td>
-                  </tr>
-                  {/* Row 3 */}
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-4 py-2 text-sm text-gray-700">003</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Chandelier
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Decorative
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">$199.99</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">10</td>
-                    <td className="px-4 py-2 text-sm text-yellow-600 font-medium">
-                      Low Stock
-                    </td>
-                  </tr>
-                  {/* Row 4 */}
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-4 py-2 text-sm text-gray-700">004</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Floodlight
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">Outdoor</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">$49.99</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">25</td>
-                    <td className="px-4 py-2 text-sm text-green-600 font-medium">
-                      In Stock
-                    </td>
-                  </tr>
-                  {/* Row 5 */}
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-4 py-2 text-sm text-gray-700">005</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Desk Lamp
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">Lamps</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">$39.99</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">0</td>
-                    <td className="px-4 py-2 text-sm text-red-600 font-medium">
-                      Out of Stock
-                    </td>
-                  </tr>
-                  {/* Row 6 */}
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-4 py-2 text-sm text-gray-700">006</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Ceiling Light
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">
-                      Fixtures
-                    </td>
-                    <td className="px-4 py-2 text-sm text-gray-700">$89.99</td>
-                    <td className="px-4 py-2 text-sm text-gray-700">15</td>
-                    <td className="px-4 py-2 text-sm text-yellow-600 font-medium">
-                      Low Stock
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="flex items-center gap-3 mb-4">
+              <PieChartIcon className="text-gray-500" size={20} />
+              <h5 className="text-lg font-medium">Stock Distribution</h5>
+            </div>
+            <div className="h-64">
+              <Pie
+                data={pieChartData}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+              />
             </div>
           </div>
-          <div className="p-4 bg-gray-100">
-            <small className="text-gray-500">Last updated 3 mins ago</small>
+          <div className="p-4 bg-gray-50 flex items-center gap-2 text-sm text-gray-500">
+            <Clock size={16} />
+            <span>Last updated 3 mins ago</span>
+          </div>
+        </div>
+
+        {/* Line Chart Card */}
+        <div className="bg-white rounded-lg shadow overflow-hidden lg:col-span-2">
+          <div className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <LineChartIcon className="text-gray-500" size={20} />
+              <h5 className="text-lg font-medium">Monthly Stock Movement</h5>
+            </div>
+            <div className="h-64">
+              <Line
+                data={lineChartData}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+              />
+            </div>
+          </div>
+          <div className="p-4 bg-gray-50 flex items-center gap-2 text-sm text-gray-500">
+            <Clock size={16} />
+            <span>Last updated 3 mins ago</span>
           </div>
         </div>
       </div>
-    </>
+
+      {/* Products Table */}
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <Lightbulb className="text-gray-500" size={20} />
+            <h5 className="text-lg font-medium">Current Inventory</h5>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Product ID
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Category
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Price
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Stock
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {[
+                  {
+                    id: "001",
+                    name: "LED Bulb",
+                    category: "Bulbs",
+                    price: "$5.99",
+                    stock: 100,
+                    status: "in-stock",
+                  },
+                  {
+                    id: "002",
+                    name: "Smart Light Strip",
+                    category: "Smart Lighting",
+                    price: "$29.99",
+                    stock: 50,
+                    status: "in-stock",
+                  },
+                  {
+                    id: "003",
+                    name: "Chandelier",
+                    category: "Decorative",
+                    price: "$199.99",
+                    stock: 10,
+                    status: "low-stock",
+                  },
+                  {
+                    id: "004",
+                    name: "Floodlight",
+                    category: "Outdoor",
+                    price: "$49.99",
+                    stock: 25,
+                    status: "in-stock",
+                  },
+                  {
+                    id: "005",
+                    name: "Desk Lamp",
+                    category: "Lamps",
+                    price: "$39.99",
+                    stock: 0,
+                    status: "out-of-stock",
+                  },
+                ].map((product) => (
+                  <tr key={product.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {product.id}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {product.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {product.category}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {product.price}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {product.stock}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <span
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          product.status === "in-stock"
+                            ? "bg-green-100 text-green-800"
+                            : product.status === "low-stock"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {product.status === "in-stock"
+                          ? "In Stock"
+                          : product.status === "low-stock"
+                          ? "Low Stock"
+                          : "Out of Stock"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="p-4 bg-gray-50 flex items-center gap-2 text-sm text-gray-500">
+          <Clock size={16} />
+          <span>Last updated 3 mins ago</span>
+        </div>
+      </div>
+    </div>
   );
 }
 

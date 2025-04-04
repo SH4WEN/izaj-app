@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useSidebar } from "../SidebarContext";
 
 function PendingRequest() {
+  const { isCollapsed } = useSidebar();
+
   const [products] = useState([
     {
       id: "001",
@@ -38,7 +41,11 @@ function PendingRequest() {
   };
 
   return (
-    <div className="ml-5 mr-5 sm:ml-70">
+    <div
+      className={`transition-all duration-300 ${
+        isCollapsed ? "ml-5" : "ml-1"
+      } p-2 sm:p-4 `}
+    >
       <div className="bg-white rounded-lg shadow-md overflow-hidden mt-5">
         <div className="p-6">
           <h5 className="text-xl font-bold mb-4">Pending Request</h5>

@@ -1,12 +1,18 @@
 import { LocationMarkerIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { useSidebar } from "../SidebarContext";
 
 function Branch_category() {
   const navigate = useNavigate(); // Initialize the navigate function
+  const { isCollapsed } = useSidebar();
 
   return (
-    <div className="ml-5 mr-5 sm:ml-70">
+    <div
+      className={`transition-all duration-300 ${
+        isCollapsed ? "ml-5" : "ml-1"
+      } p-2 sm:p-4 `}
+    >
       <div className="flex items-center mt-3">
         {" "}
         {/* Flex container to align icon and text */}
