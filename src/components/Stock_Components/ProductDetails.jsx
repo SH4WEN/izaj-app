@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import light1 from "/src/assets/image/light1.jpg"; // Import the static image
+import { useSidebar } from "../SidebarContext";
 
 function ProductDetails() {
+  const { isCollapsed } = useSidebar();
+
   const { productId } = useParams(); // Extract productId from the URL
   const navigate = useNavigate(); // Hook for navigation
 
@@ -58,7 +61,12 @@ function ProductDetails() {
   };
 
   return (
-    <div className="ml-5 mr-5 sm:ml-70 p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+    <div
+      className={`transition-all duration-300 ${
+        isCollapsed ? "ml-5" : "ml-1"
+      } p-2 sm:p-4 `}
+    >
+      {/* <div className="ml-5 mr-5 sm:ml-70 p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md"> */}
       <h1 className="text-2xl font-bold mb-4">Update Product</h1>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row gap-6">

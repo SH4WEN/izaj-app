@@ -97,7 +97,7 @@ function All_Stock() {
                 </button>
               </div>
             </div>
-            {/* Rest of your table and modal code remains the same */}
+
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white">
                 <thead>
@@ -163,7 +163,7 @@ function All_Stock() {
         </div>
       </div>
 
-      {/* Add Product Modal (rest of your modal code remains the same) */}
+      {/* Add Product Modal */}
       {isAddModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-b from-black/30 to-black/70 z-50">
           <div className="bg-gray-100  rounded-lg shadow-lg p-6 w-full max-w-2xl">
@@ -177,7 +177,7 @@ function All_Stock() {
                   </label>
                   <input
                     type="text"
-                    name="product-name"
+                    name="name"
                     value={newProduct.name}
                     onChange={handleInputChange}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -212,7 +212,7 @@ function All_Stock() {
                     Price
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="price"
                     value={newProduct.price}
                     onChange={handleInputChange}
@@ -228,7 +228,7 @@ function All_Stock() {
                   </label>
                   <input
                     type="number"
-                    name="quantity"
+                    name="stock"
                     value={newProduct.stock}
                     onChange={handleInputChange}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"

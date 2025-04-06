@@ -2,10 +2,16 @@ import { LocationMarkerIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { useSidebar } from "../SidebarContext";
+import SearchBar from "../SearchBar";
 
 function Branch_category() {
   const navigate = useNavigate(); // Initialize the navigate function
   const { isCollapsed } = useSidebar();
+
+  const handleSearch = (query) => {
+    console.log("Searching for:", query);
+    // Your custom search logic here
+  };
 
   return (
     <div
@@ -13,6 +19,12 @@ function Branch_category() {
         isCollapsed ? "ml-5" : "ml-1"
       } p-2 sm:p-4 `}
     >
+      {/* Search BAr */}
+      <SearchBar
+        onSearch={handleSearch}
+        className="p-1.5"
+        placeholder="Search Category..."
+      />
       <div className="flex items-center mt-3">
         {" "}
         {/* Flex container to align icon and text */}

@@ -21,6 +21,7 @@ import {
   AlertCircle,
   Clock,
 } from "lucide-react";
+import SearchBar from "./SearchBar";
 
 // Register Chart.js components
 ChartJS.register(
@@ -63,6 +64,10 @@ function Dashboard() {
       },
     ],
   };
+  const handleSearch = (query) => {
+    console.log("Searching for:", query);
+    // Your custom search logic here
+  };
 
   return (
     <div
@@ -70,8 +75,14 @@ function Dashboard() {
         isCollapsed ? "ml-5" : "ml-1"
       } p-2 sm:p-4 `}
     >
+      {/* Search BAr */}
+      <SearchBar
+        onSearch={handleSearch}
+        className="p-1.5"
+        placeholder="Search products..."
+      />
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid mt-1.5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {/* Total Stock Card */}
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center gap-3">
