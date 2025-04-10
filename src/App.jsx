@@ -52,11 +52,11 @@ function App() {
         <Router>
           <Routes>
             {/* Public Route: Login Page */}
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
 
             {/* Protected Routes */}
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 <ProtectedRoute
                   allowedRoles={["admin", "branchManager", "superAdmin"]}

@@ -33,12 +33,13 @@ function ProductDetails() {
     }));
   };
 
-  // Handle form submission
+  // Handle form submission for updating
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here, you can send the updated product data to an API
     console.log("Updated Product Data:", product);
     alert("Product updated successfully!");
+    navigate("/all_stock"); // Navigate back to the All Stock page after deletion
   };
 
   // Handle "Back to All Stock" button click
@@ -184,19 +185,20 @@ function ProductDetails() {
               >
                 Update Product
               </button>
-              <button
-                type="button"
-                onClick={handleBackToAllStock}
-                className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500"
-              >
-                Cancel
-              </button>
+
               <button
                 type="button"
                 onClick={handleDeleteProduct}
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 Delete Product
+              </button>
+              <button
+                type="button"
+                onClick={handleBackToAllStock}
+                className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-500"
+              >
+                Cancel
               </button>
             </div>
           </div>

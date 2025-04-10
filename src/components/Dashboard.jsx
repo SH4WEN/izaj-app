@@ -1,18 +1,6 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
-import { Line } from "react-chartjs-2";
+import ReactECharts from "echarts-for-react";
 import { useSidebar } from "./SidebarContext";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-} from "chart.js";
 import {
   Package,
   LineChart as LineChartIcon,
@@ -23,50 +11,103 @@ import {
 } from "lucide-react";
 import SearchBar from "./SearchBar";
 
-// Register Chart.js components
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title
-);
-
 function Dashboard() {
   const { isCollapsed } = useSidebar();
 
-  // Data for the Pie Chart
-  const pieChartData = {
-    labels: ["LED Bulbs", "Smart Lights", "Chandeliers"],
-    datasets: [
+  // Options for the Pie Chart
+  const pieChartOptions = {
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      top: "5%",
+      left: "center",
+    },
+    series: [
       {
-        label: "Stock Distribution",
-        data: [300, 50, 100],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        name: "Stock Distribution",
+        type: "pie",
+        radius: ["40%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        label: {
+          show: false,
+          position: "center",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: "18",
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: 300, name: "LED Bulbs", itemStyle: { color: "#FF6384" } },
+          { value: 50, name: "Smart Lights", itemStyle: { color: "#36A2EB" } },
+          { value: 100, name: "Chandeliers", itemStyle: { color: "#FFCE56" } },
+        ],
       },
     ],
   };
 
-  // Data for the Line Chart
-  const lineChartData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-    datasets: [
+  // Options for the Line Chart
+  const lineChartOptions = {
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {
+        type: "shadow",
+      },
+    },
+    xAxis: {
+      type: "category",
+      data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
       {
-        label: "Monthly Stock Movement",
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
+        name: "Monthly Stock Movement",
         data: [65, 59, 80, 81, 56, 55, 40],
-        fill: true,
+        type: "line",
+        smooth: true,
+        lineStyle: {
+          color: "rgba(75,192,192,1)",
+          width: 3,
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: "rgba(75,192,192,0.4)", // color at 0%
+              },
+              {
+                offset: 1,
+                color: "rgba(75,192,192,0.1)", // color at 100%
+              },
+            ],
+          },
+        },
       },
     ],
   };
+
   const handleSearch = (query) => {
     console.log("Searching for:", query);
-    // Your custom search logic here
+    // custom search logic here
   };
 
   return (
@@ -133,17 +174,14 @@ function Dashboard() {
         {/* Pie Chart Card */}
         <div className="bg-white rounded-lg shadow overflow-hidden lg:col-span-1">
           <div className="p-6">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-2">
               <PieChartIcon className="text-gray-500" size={20} />
               <h5 className="text-lg font-medium">Stock Distribution</h5>
             </div>
-            <div className="h-64">
-              <Pie
-                data={pieChartData}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                }}
+            <div className="h-80  ">
+              <ReactECharts
+                option={pieChartOptions}
+                style={{ height: "100%", width: "100%" }}
               />
             </div>
           </div>
@@ -156,17 +194,14 @@ function Dashboard() {
         {/* Line Chart Card */}
         <div className="bg-white rounded-lg shadow overflow-hidden lg:col-span-2">
           <div className="p-6">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-2">
               <LineChartIcon className="text-gray-500" size={20} />
               <h5 className="text-lg font-medium">Monthly Stock Movement</h5>
             </div>
-            <div className="h-64">
-              <Line
-                data={lineChartData}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                }}
+            <div className="h-80">
+              <ReactECharts
+                option={lineChartOptions}
+                style={{ height: "100%", width: "100%" }}
               />
             </div>
           </div>
